@@ -19,28 +19,17 @@ class Wizard3 extends Component {
 
     addHouse() {
         let body = {
-            name: this.props.name,
             imgurl: this.props.imgurl,
+            propertyname: this.props.propertyname,
             address: this.props.address,
             city: this.props.city,
             state: this.props.state,
             zip: this.props.zip,
-            mortgage: this.mortgage,
+            mortgage: this.props.mortgage,
             rent: this.props.rent
         }
+        console.log(body)
         axios.post(`/api/houses`, body).then((res) => {
-            this.setState({
-                houses: res.data,
-                imgurl: this.props.imgurl,
-                propertyname: this.props.name,
-                address: this.props.address,
-                city: this.props.city,
-                state: this.props.state,
-                zip: this.props.zip,
-                mortgage: this.mortgage,
-                rent: this.props.rent
-
-            })
             console.log(res.data)
         })
     }

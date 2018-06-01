@@ -11,10 +11,10 @@ module.exports = {
     addNewHouse: (req, res) => {
         const db = req.app.get('db');
         const { imgurl, propertyname, address, city, state, zip, mortgage, rent } = req.body
-
+        console.log(req.body)
         db.add_new_house([imgurl, propertyname, address, city, state, zip, mortgage, rent])
             .then(houses => res.status(200).send(houses))
-            .catch(() => res.status(500).send())
+            .catch((error) => console.log(error))
     },
 
     deleteHouse: (req, res) => {

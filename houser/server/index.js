@@ -24,15 +24,14 @@ app.use(session({
 }));
 
 //Setup middleware here
-app.use(controller.getAll)
-app.use(controller.addNewHouse)
-app.use(controller.deleteHouse)
+// app.use(controller.getAll)
+app.use(express.static(`./houser/build`))
 
 
 //Setup register endpoint here
 app.get('/api/houses', controller.getAll)
 app.post('/api/houses', controller.addNewHouse)
-app.delete('/api/houses/:id', controller.deleteHouse)
+app.delete('/api/house/:id', controller.deleteHouse)
 
 app.listen(SERVER_PORT, () => {
     console.log(`Listening on port: ${SERVER_PORT}`)

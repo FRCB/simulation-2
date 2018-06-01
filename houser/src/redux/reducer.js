@@ -1,8 +1,7 @@
 
-
 const initialState = {
-    name: '',
     imgurl: '',
+    propertyname: '',
     address: '',
     city: '',
     state: '',
@@ -23,10 +22,10 @@ const UPDATE_RENT = 'UPDATE_RENT';
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-        case UPDATE_NAME:
-            return Object.assign({}, state, { name: action.payload });
         case UPDATE_IMGURL:
             return Object.assign({}, state, { imgurl: action.payload });
+        case UPDATE_NAME:
+            return Object.assign({}, state, { propertyname: action.payload });
         case UPDATE_ADDRESS:
             return Object.assign({}, state, { address: action.payload });
         case UPDATE_CITY:
@@ -44,10 +43,10 @@ export default function reducer(state = initialState, action) {
     }
 };
 
-export function updateName(name) {
+export function updateName(propertyname) {
     return {
         type: UPDATE_NAME,
-        payload: name
+        payload: propertyname
     }
 }
 
