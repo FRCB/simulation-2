@@ -1,70 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { Route, Switch } from 'react-router-dom';
+import Wizard1 from './Wizard1';
+import Wizard2 from './Wizard2';
+import Wizard3 from './Wizard3';
 
 export default class Wizard extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            name: '',
-            address: '',
-            city: '',
-            state: '',
-            zip: ''
-        }
-        this.addHouse = this.addHouse.bind(this)
-    }
-
-    addHouse() {
-        let body = {
-            name: this.state.name,
-            address: this.state.address,
-            city: this.state.city,
-            state: this.state.state,
-            zip: this.state.zip
-        }
-        axios.post(`/api/houses`, body).then((res) => {
-            this.setState({
-                houses: res.data,
-                name: '',
-                address: '',
-                city: '',
-                state: '',
-                zip: ''
-            })
-        })
-    }
-
-
-
     render() {
         return (
             <div>
                 <h2>Wizard</h2>
                 <br />
-                <input
-                    type="text"
-                    placeholder='Enter name' />
-                <br />
-                <input
-                    type="text"
-                    placeholder='Enter address' />
-                <br />
-                <input
-                    type="text"
-                    placeholder='Enter city' />
-                <br />
-                <input
-                    type="text"
-                    placeholder='Enter state' />
-                <br />
-                <hr />
-                <button
-                    onClick={this.addHouse}>
-                    Complete
-                </button>
-                <br />
+                < Switch >
+                    <Route component={Wizard1} path='/wizard/1' />
+                    <Route component={Wizard2} path='/wizard/2' />
+                    <Route component={Wizard3} path='/wizard/3' />
+                </Switch >
                 <Link to='/'>
                     <button>
                         Cancel
