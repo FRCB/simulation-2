@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateImgURL } from '../redux/reducer'
+import axios from 'axios'
 
 class Wizard2 extends Component {
+
+    componentDidMount() {
+        axios.get('/api/houses').then((res) => {
+            this.setState({ houses: res.data })
+        })
+    }
 
     render() {
         return (
@@ -33,7 +40,7 @@ class Wizard2 extends Component {
 
 function mapStateToProps(state) {
     return {
-        imgurl: state.imgurl
+        imgurl: state.imgurl,
     }
 }
 

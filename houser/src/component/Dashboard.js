@@ -10,6 +10,7 @@ export default class Dashboard extends Component {
         this.state = {
             houses: []
         }
+        this.deleteHouse = this.deleteHouse.bind(this)
     }
 
     componentDidMount() {
@@ -18,11 +19,10 @@ export default class Dashboard extends Component {
         })
     }
 
-    deleteProduct(id) {
-        axios.delete(`api/houses/${id}`).then(res => {
+    deleteHouse(id) {
+        axios.delete(`/api/houses/${id}`).then(res => {
             this.setState({ houses: res.data })
         })
-        // .then(this.props.toRefresh())
     }
 
     render() {
@@ -30,20 +30,21 @@ export default class Dashboard extends Component {
             return (
                 <div key={i}>
                     <House
-                        id={e.id}
-                        imgurl={e.imageurl}
-                        propertyname={e.propertyname}
-                        address={e.address}
-                        city={e.city}
-                        state={e.state}
-                        zip={e.zip}
-                        mortgage={e.mortgage}
-                        rent={e.rent}
-                        deleteProduct={this.deleteProduct}
+                        dbid={e.id}
+                        dbimgurl={e.imageurl}
+                        dbpropertyname={e.propertyname}
+                        dbaddress={e.address}
+                        dbcity={e.city}
+                        dbstate={e.state}
+                        dbzip={e.zip}
+                        dbmortgage={e.mortgage}
+                        dbrent={e.rent}
+                        dbdeleteHouse={this.deleteHouse}
                     />
                 </div>
             )
         })
+
         return (
             <div>
                 <h2>Dashboard</h2>

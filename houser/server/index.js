@@ -15,6 +15,7 @@ massive(process.env.CONNECTION_STRING).then(dbInstance => app.set('db', dbInstan
 // first step - set BodyParder
 app.use(bodyParser.json())
 
+
 // Setup session here
 app.use(session({
     secret: SESSION_SECRET,
@@ -23,11 +24,15 @@ app.use(session({
 }));
 
 //Setup middleware here
-app.get('/api/houses', controller.getAll)
-app.post('/api/houses', controller.addNewHouse)
-app.delete('/api/houses', controller.deleteHouse)
+app.use(controller.getAll)
+app.use(controller.addNewHouse)
+app.use(controller.deleteHouse)
+
 
 //Setup register endpoint here
+app.get('/api/houses', controller.getAll)
+app.post('/api/houses', controller.addNewHouse)
+app.delete('/api/houses/:id', controller.deleteHouse)
 
 app.listen(SERVER_PORT, () => {
     console.log(`Listening on port: ${SERVER_PORT}`)

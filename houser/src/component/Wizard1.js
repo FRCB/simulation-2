@@ -2,10 +2,18 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateName, updateAddress, updateCity, updateState, updateZip } from '../redux/reducer'
+import axios from 'axios'
 
 class Wizard1 extends Component {
 
+    componentDidMount() {
+        axios.get('/api/houses').then((res) => {
+            this.setState({ houses: res.data })
+        })
+    }
+
     render() {
+        console.log(this.props)
         return (
             <div>
                 <p>Property Name</p>
@@ -60,3 +68,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { updateName, updateAddress, updateCity, updateState, updateZip })(Wizard1)
+
+
