@@ -10,36 +10,32 @@ export default class Dashboard extends Component {
         this.state = {
             houses: []
         }
+        this.getAllHouses = this.getAllHouses.bind(this)
         this.deleteHouse = this.deleteHouse.bind(this)
     }
 
     componentDidMount() {
+        this.getAllHouses() 
+    }
+
+    getAllHouses() {
         axios.get('/api/houses').then((res) => {
             this.setState({ houses: res.data })
         })
     }
 
     deleteHouse(id) {
-        axios.delete(`/api/houses/${id}`).then(res => {
-            this.setState({ houses: res.data })
-        })
+        axios.delete(`/api/houses/${id}`)
+        .then(this.getAllHouses())
     }
 
     render() {
-        let mappedHouses = this.state.houses.map((e, i) => {
+        let mappedHouses = this.state.houses.map((house, i) => {
             return (
                 <div key={i}>
                     <House
-                        dbid={e.id}
-                        dbimgurl={e.imageurl}
-                        dbpropertyname={e.propertyname}
-                        dbaddress={e.address}
-                        dbcity={e.city}
-                        dbstate={e.state}
-                        dbzip={e.zip}
-                        dbmortgage={e.mortgage}
-                        dbrent={e.rent}
-                        dbdeleteHouse={this.deleteHouse}
+                        house = { house }
+                        deleteHouse={this.deleteHouse}
                     />
                 </div>
             )

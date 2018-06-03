@@ -5,16 +5,16 @@ module.exports = {
 
         db.get_houses()
             .then(houses => res.status(200).send(houses))
-            .catch(() => res.status(500).send())
+            .catch((err) => res.status(500).send(err))
     },
 
     addNewHouse: (req, res) => {
         const db = req.app.get('db');
-        const { imgurl, propertyname, address, city, state, zip, mortgage, rent } = req.body
-        console.log(req.body)
-        db.add_new_house([imgurl, propertyname, address, city, state, zip, mortgage, rent])
+        const { imgUrl, propertyName, address, city, state, zip, mortgage, rent } = req.body
+        
+        db.add_new_house([imgUrl, propertyName, address, city, state, zip, mortgage, rent])
             .then(houses => res.status(200).send(houses))
-            .catch((error) => console.log(error))
+            .catch((err) => console.log(err))
     },
 
     deleteHouse: (req, res) => {
@@ -22,7 +22,8 @@ module.exports = {
         const id = req.params.id;
 
         db.delete_house([id])
-            .then(houses => res.status(200).send(houses)).catch(() => res.status(500).send())
+            .then(houses => res.status(200).send(houses))
+            .catch((err) => res.status(500).send(err))
     }
 }
 

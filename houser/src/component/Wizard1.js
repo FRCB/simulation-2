@@ -13,7 +13,6 @@ class Wizard1 extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <div>
                 <p>Property Name</p>
@@ -59,7 +58,7 @@ class Wizard1 extends Component {
 
 function mapStateToProps(state) {
     return {
-        name: state.name,
+        propertyName: state.propertyName,
         address: state.address,
         city: state.city,
         state: state.state,

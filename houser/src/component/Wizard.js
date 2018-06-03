@@ -1,23 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
-import axios from 'axios';
-import { connect } from 'react-redux';
 import Wizard1 from './Wizard1';
 import Wizard2 from './Wizard2';
 import Wizard3 from './Wizard3';
-import { updateName, updateImgURL, updateAddress, updateCity, updateState, updateZip, updateMortage, updateRent } from '../redux/reducer'
+import { connect } from 'react-redux';
+import { cancel } from '../redux/reducer'
+
 
 
 class Wizard extends Component {
-
-    componentDidMount() {
-        axios.get('/api/houses').then((res) => {
-            this.setState({ houses: res.data })
-        })
-    }
-
-
 
     render() {
 
@@ -31,7 +23,9 @@ class Wizard extends Component {
                     <Route component={Wizard3} path='/wizard/3' />
                 </Switch >
                 <Link to='/'>
-                    <button>
+                    <button
+                    onClick={() => this.props.cancel()}
+                    >
                         Cancel
                     </button>
                 </Link>
@@ -40,17 +34,4 @@ class Wizard extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        name: state.name,
-        imgurl: state.imgurl,
-        address: state.address,
-        city: state.city,
-        state: state.state,
-        zip: state.zip,
-        mortgage: state.mortgage,
-        rent: state.rent
-    }
-}
-
-export default connect(mapStateToProps, { updateName, updateImgURL, updateAddress, updateCity, updateState, updateZip, updateMortage, updateRent })(Wizard)
+export default connect( null, { cancel })(Wizard)

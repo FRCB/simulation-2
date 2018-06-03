@@ -40,7 +40,7 @@ class Wizard2 extends Component {
 
 function mapStateToProps(state) {
     return {
-        imgurl: state.imgurl,
+        imgUrl: state.imgUrl,
     }
 }
 

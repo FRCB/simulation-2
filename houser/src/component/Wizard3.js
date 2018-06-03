@@ -11,25 +11,12 @@ class Wizard3 extends Component {
         this.addHouse = this.addHouse.bind(this)
     }
 
-    componentDidMount() {
-        axios.get('/api/houses').then((res) => {
-            this.setState({ houses: res.data })
-        })
-    }
-
     addHouse() {
-        let body = {
-            imgurl: this.props.imgurl,
-            propertyname: this.props.propertyname,
-            address: this.props.address,
-            city: this.props.city,
-            state: this.props.state,
-            zip: this.props.zip,
-            mortgage: this.props.mortgage,
-            rent: this.props.rent
-        }
-        console.log(body)
-        axios.post(`/api/houses`, body).then((res) => {
+        let { imgUrl, propertyName, address, city, state, zip, mortgage, rent } = this.props
+        let body = { imgUrl, propertyName, address, city, state, zip, mortgage, rent }
+
+        axios.post(`/api/houses`, body)
+        .then((res) => {
             console.log(res.data)
         })
     }
@@ -68,8 +55,8 @@ class Wizard3 extends Component {
 
 function mapStateToProps(state) {
     return {
-        name: state.name,
-        imgurl: state.imgurl,
+        propertyName: state.propertyName,
+        imgUrl: state.imgUrl,
         address: state.address,
         city: state.city,
         state: state.state,

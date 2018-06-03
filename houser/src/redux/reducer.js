@@ -1,7 +1,7 @@
 
 const initialState = {
-    imgurl: '',
-    propertyname: '',
+    imgUrl: '',
+    propertyName: '',
     address: '',
     city: '',
     state: '',
@@ -18,14 +18,15 @@ const UPDATE_STATE = 'UPDATE_STATE';
 const UPDATE_ZIP = 'UPDATE_ZIP';
 const UPDATE_MORTGAGE = 'UPDATE_MORTGAGE';
 const UPDATE_RENT = 'UPDATE_RENT';
+const CANCEL = "CANCEL";
 
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case UPDATE_IMGURL:
-            return Object.assign({}, state, { imgurl: action.payload });
+            return Object.assign({}, state, { imgUrl: action.payload });
         case UPDATE_NAME:
-            return Object.assign({}, state, { propertyname: action.payload });
+            return Object.assign({}, state, { propertyName: action.payload });
         case UPDATE_ADDRESS:
             return Object.assign({}, state, { address: action.payload });
         case UPDATE_CITY:
@@ -38,22 +39,24 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { mortgage: action.payload });
         case UPDATE_RENT:
             return Object.assign({}, state, { rent: action.payload });
+        case CANCEL :
+            return Object.assign({}, state, action.payload);
         default:
             return state
     }
 };
 
-export function updateName(propertyname) {
+export function updateName(propertyName) {
     return {
         type: UPDATE_NAME,
-        payload: propertyname
+        payload: propertyName
     }
 }
 
-export function updateImgURL(imgurl) {
+export function updateImgURL(imgUrl) {
     return {
         type: UPDATE_IMGURL,
-        payload: imgurl
+        payload: imgUrl
     }
 }
 
@@ -96,5 +99,12 @@ export function updateRent(rent) {
     return {
         type: UPDATE_RENT,
         payload: rent
+    }
+}
+
+export function cancel() {
+    return {
+    type: CANCEL,
+    payload: initialState
     }
 }
